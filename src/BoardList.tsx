@@ -10,13 +10,6 @@ interface DateItem {
   active: boolean;
 }
 
-// // 게시물 타입 정의
-// interface PostItem {
-//   time: string;
-//   location: string;
-//   status: boolean;
-// }
-
 const BoardList: React.FC = ({}) => {
   const navigate = useNavigate();
   // 날짜 데이터
@@ -25,18 +18,6 @@ const BoardList: React.FC = ({}) => {
     { day: 13, label: "수", active: false },
     { day: 14, label: "목", active: false },
   ];
-
-  // 게시물 데이터
-  // const posts: PostItem[] = [
-  //   { time: "11:00", location: "부산 광안리해수욕장", status: true },
-  //   { time: "11:00", location: "부산 광안리해수욕장", status: true },
-  //   { time: "11:00", location: "부산 광안리해수욕장", status: true },
-  //   { time: "11:00", location: "부산 광안리해수욕장", status: true },
-  //   { time: "11:00", location: "부산 광안리해수욕장", status: true },
-  //   { time: "11:00", location: "부산 광안리해수욕장", status: true },
-  //   { time: "11:00", location: "부산 광안리해수욕장", status: true },
-  //   { time: "11:00", location: "부산 광안리해수욕장", status: true },
-  // ];
 
   return (
     <div className="bg-gray-50 h-screen flex flex-col">
@@ -53,17 +34,17 @@ const BoardList: React.FC = ({}) => {
       </header>
 
       {/* 날짜 선택 */}
-      <div className="p-4 item">
+      <div className="p-4 item ml-10">
         <div className="flex gap-2">
           {dates.map((date) => (
             <button
               key={date.day}
               className={`flex flex-col items-center justify-center w-16 h-16 rounded-lg border
-              ${
-                date.active
-                  ? "bg-orange-500 text-white"
-                  : "border-orange-500 text-orange-500"
-              }`}
+        ${
+          date.active
+            ? "bg-orange-500 text-white"
+            : "border-orange-500 text-orange-500"
+        }`}
             >
               <span className="text-lg font-bold">{date.day}</span>
               <span className="text-sm">{date.label}</span>
@@ -96,7 +77,7 @@ const BoardList: React.FC = ({}) => {
                   navigate("/post");
                 }}
               >
-                {post.status}
+                {post.status ? "신청가능" : "인원초과"}
               </button>
             </div>
           ))}

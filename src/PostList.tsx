@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import React from "react";
+import { posts } from "./contents/postItem";
 
 //게시물 데이터 타입 정의
 interface PostDetails {
@@ -24,10 +25,10 @@ const PostList: React.FC = () => {
       {/* 헤더 */}
       <header className="items-center justify-center p-4 w-full fixed top-0 left-0 z-50">
         <div className="flex flex-col items-center justify-center p-4">
-          <h1 className="text-2xl font-bold text-[#FF9E77] mb-2 text-center">
+          <h1 className="text-2xl font-bold text-[#FF512A] mb-2 text-center">
             부산 광안리해수욕장
           </h1>
-          <p className="text-sm text-[#FF9E77] text-center">
+          <p className="text-sm text-[#FF512A] text-center">
             현재위치: 부산광역시 부산진구 엄광로 176
           </p>
         </div>
