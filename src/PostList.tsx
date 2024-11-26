@@ -21,21 +21,25 @@ const PostList: React.FC = () => {
   };
 
   return (
-    <div className="p-4 bg-white min-h-screen">
+    <div className="p-4 bg-white min-h-screen pt-12">
       {/* 헤더 */}
-      <header className="items-center justify-center p-4 w-full fixed top-0 left-0 z-50">
+      <header className="items-center justify-center p-4 w-full fixed top-0 left-0 z-50 bg-[#FF9E77] py-1">
         <div className="flex flex-col items-center justify-center p-4">
-          <h1 className="text-2xl font-bold text-[#FF512A] mb-2 text-center">
+          <h1 className="text-2xl font-bold text-white mb-2 text-center">
             부산 광안리해수욕장
           </h1>
-          <p className="text-sm text-[#FF512A] text-center">
+          <p className="text-sm text-white text-center">
             현재위치: 부산광역시 부산진구 엄광로 176
           </p>
         </div>
       </header>
-
+      <img
+        src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDA5MjdfMjM2%2FMDAxNzI3NDE1NDc1NzUy.41PzRGTkgr-2YjdxBKQ4X3rlIV-dF16RkXTVXlpJH2Eg.TkaGAY7WS8tC5TRLqfDFAb0nZ4D1LF_PUfOtqZq70lQg.JPEG%2FDSC_1063.jpg&type=sc960_832"
+        alt="Placeholder Image"
+        className="w-full h-[14rem] rounded-lg shadow-md mt-16"
+      />
       {/* 콘텐츠 간격 확보 */}
-      <div className="relative pt-24 p-4 space-y-6">
+      <div className="relative pt-15 p-4 space-y-6 ">
         {/* 게시물 정보 */}
         <div className="p-6 bg-white rounded-lg shadow">
           <p className="text-lg font-bold">{post.time}</p>
