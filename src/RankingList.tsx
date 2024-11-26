@@ -25,11 +25,11 @@ const RankingPage: React.FC = () => {
   ];
 
   return (
-    <div className="py-6 min-h-screen w-full">
+    <div className="min-h-screen w-full">
       {/* Page Header */}
-      <div className="text-center mb-6">
-        <h1 className="text-2xl font-bold text-red-500 mb-3">랭킹</h1>
-        <p className="text-gray-600">이번 주 상위 러너 랭킹</p>
+      <div className="text-center mb-6 bg-[#FF9E77] py-3">
+        <h1 className="text-2xl font-bold text-white mb-3">랭킹</h1>
+        <p className="text-white">이번 주 상위 러너 랭킹</p>
       </div>
 
       {/* Scrollable Ranking List */}

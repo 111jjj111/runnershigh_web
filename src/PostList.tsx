@@ -21,7 +21,7 @@ const PostList: React.FC = () => {
   };
 
   return (
-    <div className="p-4 bg-gray-50 min-h-screen">
+    <div className="p-4 bg-white min-h-screen">
       {/* 헤더 */}
       <header className="items-center justify-center p-4 w-full fixed top-0 left-0 z-50">
         <div className="flex flex-col items-center justify-center p-4">

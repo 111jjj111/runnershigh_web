@@ -20,22 +20,20 @@ const BoardList: React.FC = ({}) => {
   ];
 
   return (
-    <div className="bg-gray-50 h-screen flex flex-col">
+    <div className="bg-white h-screen flex flex-col">
       {/* 헤더 */}
-      <header className="bg-grey-50 p-8">
+      <header className="bg-[#FF9E77] p-8">
         <div className="flex flex-col items-center justify-center">
-          <h1 className="text-2xl font-bold text-[#FF512A] mb-2 text-center">
-            게시판
-          </h1>
-          <p className="text-sm text-[#FF512A] text-center">
+          <h1 className="text-2xl font-bold text-white mb-2">게시판</h1>
+          <p className="text-sm text-white text-center">
             현재위치: 부산광역시 부산진구 엄광로 176
           </p>
         </div>
       </header>
 
       {/* 날짜 선택 */}
-      <div className="p-4 item ml-10">
-        <div className="flex gap-2">
+      <div className="p-4 item">
+        <div className="flex gap-2 justify-center">
           {dates.map((date) => (
             <button
               key={date.day}
