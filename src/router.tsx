@@ -5,6 +5,7 @@ import BoardList from "./BoardList";
 import PostList from "./PostList";
 import RankingList from "./RankingList";
 import Mission from "./Mission";
+import CreatePost from "./CreatePost";
 
 const Router = () => {
   return (
@@ -14,6 +15,7 @@ const Router = () => {
         <Route path="/post" element={<PostList />}></Route>
         <Route path="/ranking" element={<RankingList />}></Route>
         <Route path="/mission" element={<Mission />}></Route>
+        <Route path="/createpost" element={<CreatePost />}></Route>
       </Routes>
     </BrowserRouter>
   );
