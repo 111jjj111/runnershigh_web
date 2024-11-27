@@ -20,12 +20,12 @@ const BoardList: React.FC = ({}) => {
   ]);
 
   return (
-    <div className="bg-white h-screen flex flex-col">
+    <div className=" h-screen flex flex-col">
       {/* 헤더 */}
-      <header className="bg-[#FF9E77] p-8">
+      <header className=" p-8">
         <div className="flex flex-col items-center justify-center">
-          <h1 className="text-2xl font-bold text-white mb-2">게시판</h1>
-          <p className="text-sm text-white text-center">
+          <h1 className="text-2xl font-bold text-gray-700 mb-2">게시판</h1>
+          <p className="text-sm text-gray-400 text-center">
             현재위치: 부산광역시 부산진구 엄광로 176
           </p>
         </div>
@@ -50,7 +50,7 @@ const BoardList: React.FC = ({}) => {
         ${
           value.active
             ? "bg-orange-500 text-white"
-            : "border-orange-500 text-orange-500"
+            : "border-orange-500 text-orange-500 bg-white"
         }`}
             >
               <span className="text-lg font-bold">{value.day}</span>

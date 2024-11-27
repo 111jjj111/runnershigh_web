@@ -25,15 +25,15 @@ const RankingPage: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen w-full">
+    <div className="min-h-screen w-full bg-orange-50/40">
       {/* Page Header */}
-      <div className="text-center mb-6 bg-[#FF9E77] py-3">
-        <h1 className="text-2xl font-bold text-white mb-3">랭킹</h1>
-        <p className="text-white">이번 주 상위 러너 랭킹</p>
+      <div className="text-center mb-6 py-3">
+        <h1 className="text-2xl font-bold text-orange-500 mb-3">랭킹</h1>
+        <p className="text-gray-400">이번 주 상위 러너 랭킹</p>
       </div>
 
       {/* Scrollable Ranking List */}
-      <div className="w-full h-[600px] overflow-y-auto space-y-4 bg-white p-4 rounded-lg shadow-md border mt-2">
+      <div className="w-full h-[600px] overflow-y-auto space-y-4 bg-orange-50/40 p-4 rounded-lg shadow-md border mt-2">
         {ranking.map((person, index) => (
           <div
             key={index}

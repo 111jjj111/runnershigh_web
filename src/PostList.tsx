@@ -21,14 +21,14 @@ const PostList: React.FC = () => {
   };
 
   return (
-    <div className="p-4 bg-white min-h-screen pt-12">
+    <div className="p-4 bg-orange-50/40 min-h-screen pt-12">
       {/* 헤더 */}
-      <header className="items-center justify-center p-4 w-full fixed top-0 left-0 z-50 bg-[#FF9E77] py-1">
+      <header className="items-center justify-center p-4 w-full fixed top-0 left-0 z-50  py-1">
         <div className="flex flex-col items-center justify-center p-4">
-          <h1 className="text-2xl font-bold text-white mb-2 text-center">
+          <h1 className="text-2xl font-bold text-gray-700 mb-2 text-center">
             부산 광안리해수욕장
           </h1>
-          <p className="text-sm text-white text-center">
+          <p className="text-sm text-gray-500 text-center">
             현재위치: 부산광역시 부산진구 엄광로 176
           </p>
         </div>
