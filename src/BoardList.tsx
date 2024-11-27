@@ -91,7 +91,7 @@ const BoardList: React.FC = ({}) => {
         </div>
       </div>
 
-      <div className="fixed bottom-10 right-10">
+      <div className="fixed bottom-8 right-10">
         <button
           className="bg-gray-200 text-black px-6 py-3 rounded-full font-bold shadow w-[60px] h-[60px] flex items-center justify-center text-3xl"
           onClick={() => {
