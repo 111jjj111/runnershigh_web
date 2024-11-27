@@ -13,11 +13,11 @@ interface DateItem {
 const BoardList: React.FC = ({}) => {
   const navigate = useNavigate();
   // 날짜 데이터
-  const dates: DateItem[] = [
+  const [date, setDate] = useState<DateItem[]>([
     { day: 12, label: "화", active: true },
     { day: 13, label: "수", active: false },
     { day: 14, label: "목", active: false },
-  ];
+  ]);
 
   return (
     <div className="bg-white h-screen flex flex-col">
@@ -34,18 +34,27 @@ const BoardList: React.FC = ({}) => {
       {/* 날짜 선택 */}
       <div className="p-4 item">
         <div className="flex gap-2 justify-center">
-          {dates.map((date) => (
+          {date.map((value, index) => (
             <button
-              key={date.day}
+              key={index}
+              onClick={() => {
+                setDate(
+                  date.map((item) =>
+                    item.day === value.day
+                      ? { ...item, active: true }
+                      : { ...item, active: false }
+                  )
+                );
+              }}
               className={`flex flex-col items-center justify-center w-16 h-16 rounded-lg border
         ${
-          date.active
+          value.active
             ? "bg-orange-500 text-white"
             : "border-orange-500 text-orange-500"
         }`}
             >
-              <span className="text-lg font-bold">{date.day}</span>
-              <span className="text-sm">{date.label}</span>
+              <span className="text-lg font-bold">{value.day}</span>
+              <span className="text-sm">{value.label}</span>
             </button>
           ))}
         </div>
