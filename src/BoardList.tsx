@@ -20,7 +20,7 @@ const BoardList: React.FC = ({}) => {
   ]);
 
   return (
-    <div className=" h-screen flex flex-col">
+    <div className=" h-screen flex flex-col bg-orange-50/40">
       {/* 헤더 */}
       <header className=" p-8">
         <div className="flex flex-col items-center justify-center">
@@ -70,7 +70,7 @@ const BoardList: React.FC = ({}) => {
             >
               <div>
                 <p className="text-lg font-bold">{post.time}</p>
-                <p className="text-sm text-gray-500">{post.location}</p>
+                <p className="text-sm text-gray-500">{post.title}</p>
                 <p className="text-xs text-gray-400">남녀 모두</p>
               </div>
               <button
