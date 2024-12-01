@@ -45,7 +45,7 @@ const CreatePost: React.FC = () => {
     // const token =
     //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJ1c2VyTmFtZSI6Iuq5gOyYgeynhCIsImlhdCI6MTczMzA1NjQ5MiwiZXhwIjoxNzMzMTQyODkyfQ.w35JoV90xVKs_A6re_iZ5FUA3Xb4rUWaa5_6R1ytMbo";
     const response = await axios.post(
-      "http://113.198.230.24:3338/board/create",
+      "http://113.198.230.24:3338/user/create",
       sendData,
       { headers: { Authorization: `Bearer ${token}` } }
     );
