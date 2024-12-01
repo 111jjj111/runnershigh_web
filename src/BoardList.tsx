@@ -98,7 +98,7 @@ const BoardList: React.FC = ({}) => {
         <button
           className="bg-gray-200 text-black px-6 py-3 rounded-full font-bold shadow w-[60px] h-[60px] flex items-center justify-center text-3xl"
           onClick={() => {
-            navigate("/createpost");
+            navigate("/createpost?token=" + token);
           }}
         >
           <img src="svgs/plus.svg" />
