@@ -169,7 +169,7 @@ const CreatePost: React.FC = () => {
 
         {/* 버튼 */}
         <div className="flex gap-4">
-          <div style={{ color: color }}>123</div>
+          <div>{color}</div>
           <button
             onClick={handleSubmit}
             className="flex-1 bg-orange-500 text-white py-2 rounded-lg shadow hover:bg-orange-600 transition"
