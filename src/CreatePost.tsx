@@ -11,6 +11,7 @@ const CreatePost: React.FC = () => {
   const [contents, setContent] = useState("");
   const [gender, setGender] = useState("");
   const [time, setTime] = useState("");
+  const [color, setColor] = useState("black");
   // const [image_url, setImage] = useState<File | null>(null);
   const navigate = useNavigate();
 
@@ -53,6 +54,7 @@ const CreatePost: React.FC = () => {
 
   const handleSubmit = async () => {
     await createBoard();
+    setColor("green");
     alert("게시글이 작성되었습니다!");
   };
 
@@ -167,6 +169,7 @@ const CreatePost: React.FC = () => {
 
         {/* 버튼 */}
         <div className="flex gap-4">
+          <div style={{ color: color }}>123</div>
           <button
             onClick={handleSubmit}
             className="flex-1 bg-orange-500 text-white py-2 rounded-lg shadow hover:bg-orange-600 transition"
