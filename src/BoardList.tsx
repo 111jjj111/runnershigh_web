@@ -49,7 +49,7 @@ const BoardList: React.FC = () => {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(
-          "http://113.198.230.24:3338/board/search",
+          "http://113.198.230.24:3338/board/search/all",
           {
             headers: {
               Authorization: `Bearer ${token}`,

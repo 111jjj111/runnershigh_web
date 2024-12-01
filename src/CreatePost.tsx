@@ -1,66 +1,68 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { data, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
 const CreatePost: React.FC = () => {
-  // const [params] = useSearchParams();
-  // const token = params.get("token");
   const [title, setTitle] = useState("");
   const [contents, setContent] = useState("");
   const [gender, setGender] = useState("");
   const [time, setTime] = useState("");
-  // const [image_url, setImage] = useState<File | null>(null);
-  const navigate = useNavigate();
-
   const [value, onChange] = useState<Date | null | [Date | null, Date | null]>(
     new Date()
   );
   const [modal, setModal] = useState(false);
+  const navigate = useNavigate();
 
-  console.log(value?.toLocaleString);
-
-  // const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   if (event.target.files) {
-  //     setImage(event.target.files[0]);
-  //   }
-  // };
-
-  const handleTimeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setTime(event.target.value);
-  };
+  // 선택된 날짜 가져오기
   const selectedDate =
     value instanceof Date ? value.toISOString().split("T")[0] : "";
+
+  // 게시글 생성 API 호출 함수
   const createBoard = async () => {
     const sendData = {
       title,
       contents,
-      // image_url: image_url ? URL.createObjectURL(image_url) : null,
       gender,
       time,
       date: selectedDate,
     };
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJ1c2VyTmFtZSI6Iuq5gOyYgeynhCIsImlhdCI6MTczMzA1NjQ5MiwiZXhwIjoxNzMzMTQyODkyfQ.w35JoV90xVKs_A6re_iZ5FUA3Xb4rUWaa5_6R1ytMbo";
-    const response = await axios.post(
-      "http://113.198.230.24:3338/board/create",
-      sendData,
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-    console.log(response);
+
+    try {
+      const token = localStorage.getItem("accessToken"); // 로컬 스토리지에서 토큰 읽기
+
+      if (!token) {
+        alert("로그인이 필요합니다.");
+        navigate("/login");
+        return;
+      }
+
+      // Axios POST 요청
+      const response = await axios.post(
+        "http://113.198.230.24:3338/board/create",
+        sendData,
+        {
+          headers: { Authorization: `Bearer ${token}` }, // 헤더에 토큰 추가
+        }
+      );
+
+      console.log("Board Created:", response.data);
+      alert("게시글이 작성되었습니다!");
+      navigate(-1);
+    } catch (error) {
+      console.error("Create Board Error:", error);
+      alert("게시글 작성에 실패했습니다.");
+    }
   };
 
+  // 작성 완료 버튼 클릭 핸들러
   const handleSubmit = async () => {
     await createBoard();
-    alert("게시글이 작성되었습니다!");
-    navigate(-1);
   };
 
   return (
     <div className="bg-orange-50 min-h-screen flex flex-col items-center p-4">
-      {/* 헤더 */}
-
       {/* 헤더 */}
       <header className="p-8">
         <div className="flex flex-col items-center justify-center">
@@ -69,6 +71,7 @@ const CreatePost: React.FC = () => {
           </h1>
         </div>
       </header>
+
       {/* 본문 */}
       <main className="w-full max-w-lg bg-white p-6 rounded-lg shadow-md flex flex-col gap-4 mt-14">
         {/* 제목 입력 */}
@@ -88,7 +91,7 @@ const CreatePost: React.FC = () => {
           className="w-full border border-orange-300 rounded-lg p-3 h-32 focus:ring-2 focus:ring-orange-500 focus:outline-none resize-none"
         ></textarea>
 
-        {/* 카테고리 선택 */}
+        {/* 성별 선택 */}
         <select
           value={gender}
           onChange={(e) => setGender(e.target.value)}
@@ -97,19 +100,20 @@ const CreatePost: React.FC = () => {
           <option value="" disabled>
             성별을 선택하세요
           </option>
-          <option value="남자">남자</option>
-          <option value="여자">여자</option>
-          <option value="남녀모두">모두</option>
+          <option value="man">남자</option>
+          <option value="woman">여자</option>
+          <option value="all">모두</option>
         </select>
 
+        {/* 날짜 선택 버튼 */}
         <button
-          onClick={() => {
-            setModal(true);
-          }}
+          onClick={() => setModal(true)}
+          className="bg-orange-500 text-white py-2 rounded-lg shadow"
         >
           날짜 선택
         </button>
 
+        {/* 달력 모달 */}
         {modal && (
           <div
             className="absolute top-0 left-0 right-0 bottom-0 w-full h-full bg-[#00000030] flex items-center justify-center p-6"
@@ -133,7 +137,7 @@ const CreatePost: React.FC = () => {
           </label>
           <select
             id="time-select"
-            onChange={handleTimeChange}
+            onChange={(e) => setTime(e.target.value)}
             className="border border-gray-300 rounded-lg p-2"
           >
             <option value="">시간을 선택하세요</option>
@@ -144,27 +148,6 @@ const CreatePost: React.FC = () => {
             ))}
           </select>
         </div>
-
-        {/* <div className="flex flex-col items-start">
-          <label
-            htmlFor="image-upload"
-            className="bg-orange-500 text-white px-4 py-2 rounded-lg cursor-pointer"
-          ></label>
-          <input
-            id="image-upload"
-            type="file"
-            accept="image/*"
-            onChange={handleImageUpload}
-            className="hidden"
-          />
-          {image_url && (
-            <img
-              src={URL.createObjectURL(image_url)}
-              alt="Preview"
-              className="mt-4 w-full max-h-40 object-cover rounded-lg border border-orange-300"
-            />
-          )}
-        </div> */}
 
         {/* 버튼 */}
         <div className="flex gap-4">
