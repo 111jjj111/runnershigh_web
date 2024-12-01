@@ -1,19 +1,56 @@
+import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 
 const CreatePost: React.FC = () => {
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [category, setCategory] = useState("");
-  const [image, setImage] = useState<File | null>(null);
+  const [contents, setContent] = useState("");
+  const [gender, setGender] = useState("");
+  const [time, setTime] = useState("");
+  // const [image_url, setImage] = useState<File | null>(null);
   const navigate = useNavigate();
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      setImage(event.target.files[0]);
-    }
+
+  const [value, onChange] = useState<Date | null | [Date | null, Date | null]>(
+    new Date()
+  );
+  const [modal, setModal] = useState(false);
+
+  console.log(value?.toLocaleString);
+
+  // const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (event.target.files) {
+  //     setImage(event.target.files[0]);
+  //   }
+  // };
+
+  const handleTimeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setTime(event.target.value);
+  };
+  const selectedDate =
+    value instanceof Date ? value.toISOString().split("T")[0] : "";
+  const createBoard = async () => {
+    const sendData = {
+      title,
+      contents,
+      // image_url: image_url ? URL.createObjectURL(image_url) : null,
+      gender,
+      time,
+      date: selectedDate,
+    };
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJ1c2VyTmFtZSI6Iuq5gOyYgeynhCIsImlhdCI6MTczMzA1NjQ5MiwiZXhwIjoxNzMzMTQyODkyfQ.w35JoV90xVKs_A6re_iZ5FUA3Xb4rUWaa5_6R1ytMbo";
+    const response = await axios.post(
+      "http://113.198.230.24:3338/board/create",
+      sendData,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    console.log(response);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    await createBoard();
     alert("게시글이 작성되었습니다!");
   };
 
@@ -43,33 +80,73 @@ const CreatePost: React.FC = () => {
         {/* 내용 입력 */}
         <textarea
           placeholder="내용을 작성하세요"
-          value={content}
+          value={contents}
           onChange={(e) => setContent(e.target.value)}
           className="w-full border border-orange-300 rounded-lg p-3 h-32 focus:ring-2 focus:ring-orange-500 focus:outline-none resize-none"
         ></textarea>
 
         {/* 카테고리 선택 */}
         <select
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
+          value={gender}
+          onChange={(e) => setGender(e.target.value)}
           className="w-full border border-orange-300 rounded-lg p-3 bg-white focus:ring-2 focus:ring-orange-500 focus:outline-none"
         >
           <option value="" disabled>
-            카테고리를 선택하세요
+            성별을 선택하세요
           </option>
-          <option value="general">일반</option>
-          <option value="announcement">공지</option>
-          <option value="question">질문</option>
+          <option value="man">남자</option>
+          <option value="woman">여자</option>
+          <option value="all">모두</option>
         </select>
 
-        {/* 이미지 업로드 */}
-        <div className="flex flex-col items-start">
+        <button
+          onClick={() => {
+            setModal(true);
+          }}
+        >
+          날짜 선택
+        </button>
+
+        {modal && (
+          <div
+            className="absolute top-0 left-0 right-0 bottom-0 w-full h-full bg-[#00000030] flex items-center justify-center p-6"
+            onClick={(event) => {
+              event.stopPropagation();
+              setModal(false);
+            }}
+          >
+            <Calendar
+              onChange={onChange}
+              value={value}
+              className="m-auto bg-white p-4 rounded-lg space-y-2"
+            />
+          </div>
+        )}
+
+        {/* 시간 선택 */}
+        <div className="flex flex-col items-start mt-4">
+          <label htmlFor="time-select" className="mb-2 text-lg">
+            시간 선택
+          </label>
+          <select
+            id="time-select"
+            onChange={handleTimeChange}
+            className="border border-gray-300 rounded-lg p-2"
+          >
+            <option value="">시간을 선택하세요</option>
+            {Array.from({ length: 24 }, (_, index) => (
+              <option key={index} value={`${index}:00`}>
+                {`${index}:00`}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* <div className="flex flex-col items-start">
           <label
             htmlFor="image-upload"
             className="bg-orange-500 text-white px-4 py-2 rounded-lg cursor-pointer"
-          >
-            이미지 업로드
-          </label>
+          ></label>
           <input
             id="image-upload"
             type="file"
@@ -77,14 +154,14 @@ const CreatePost: React.FC = () => {
             onChange={handleImageUpload}
             className="hidden"
           />
-          {image && (
+          {image_url && (
             <img
-              src={URL.createObjectURL(image)}
+              src={URL.createObjectURL(image_url)}
               alt="Preview"
               className="mt-4 w-full max-h-40 object-cover rounded-lg border border-orange-300"
             />
           )}
-        </div>
+        </div> */}
 
         {/* 버튼 */}
         <div className="flex gap-4">
