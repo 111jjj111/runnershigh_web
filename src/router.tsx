@@ -13,7 +13,7 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<BoardList />}></Route>
-        <Route path="/post" element={<PostList />}></Route>
+        <Route path="/post/:postId" element={<PostList />} />
         <Route path="/ranking" element={<RankingList />}></Route>
         <Route path="/mission" element={<Mission />}></Route>
         <Route path="/createpost" element={<CreatePost />}></Route>

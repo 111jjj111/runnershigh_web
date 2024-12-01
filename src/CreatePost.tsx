@@ -5,13 +5,12 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
 const CreatePost: React.FC = () => {
-  const [params] = useSearchParams();
-  const token = params.get("token");
+  // const [params] = useSearchParams();
+  // const token = params.get("token");
   const [title, setTitle] = useState("");
   const [contents, setContent] = useState("");
   const [gender, setGender] = useState("");
   const [time, setTime] = useState("");
-  const [color, setColor] = useState("black");
   // const [image_url, setImage] = useState<File | null>(null);
   const navigate = useNavigate();
 
@@ -42,8 +41,8 @@ const CreatePost: React.FC = () => {
       time,
       date: selectedDate,
     };
-    // const token =
-    //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJ1c2VyTmFtZSI6Iuq5gOyYgeynhCIsImlhdCI6MTczMzA1NjQ5MiwiZXhwIjoxNzMzMTQyODkyfQ.w35JoV90xVKs_A6re_iZ5FUA3Xb4rUWaa5_6R1ytMbo";
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJ1c2VyTmFtZSI6Iuq5gOyYgeynhCIsImlhdCI6MTczMzA1NjQ5MiwiZXhwIjoxNzMzMTQyODkyfQ.w35JoV90xVKs_A6re_iZ5FUA3Xb4rUWaa5_6R1ytMbo";
     const response = await axios.post(
       "http://113.198.230.24:3338/board/create",
       sendData,
@@ -54,8 +53,8 @@ const CreatePost: React.FC = () => {
 
   const handleSubmit = async () => {
     await createBoard();
-    setColor("green");
     alert("게시글이 작성되었습니다!");
+    navigate(-1);
   };
 
   return (
@@ -98,9 +97,9 @@ const CreatePost: React.FC = () => {
           <option value="" disabled>
             성별을 선택하세요
           </option>
-          <option value="man">남자</option>
-          <option value="woman">여자</option>
-          <option value="all">모두</option>
+          <option value="남자">남자</option>
+          <option value="여자">여자</option>
+          <option value="남녀모두">모두</option>
         </select>
 
         <button
@@ -169,7 +168,6 @@ const CreatePost: React.FC = () => {
 
         {/* 버튼 */}
         <div className="flex gap-4">
-          <div>{color}</div>
           <button
             onClick={handleSubmit}
             className="flex-1 bg-orange-500 text-white py-2 rounded-lg shadow hover:bg-orange-600 transition"

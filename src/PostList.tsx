@@ -1,24 +1,64 @@
 import { useEffect, useState } from "react";
 import React from "react";
-import { posts } from "./contents/postItem";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
-//게시물 데이터 타입 정의
+// 게시물 데이터 타입 정의
 interface PostDetails {
+  id: number;
   time: string;
   location: string;
   status: "마감임박!" | "신청가능";
   description: string;
 }
 
+// 인증 토큰
+const token =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJ1c2VyTmFtZSI6Iuq5gOyYgeynhCIsImlhdCI6MTczMzA1NjQ5MiwiZXhwIjoxNzMzMTQyODkyfQ.w35JoV90xVKs_A6re_iZ5FUA3Xb4rUWaa5_6R1ytMbo";
+
 const PostList: React.FC = () => {
-  // 선택된 게시물 데이터
-  const post: PostDetails = {
-    time: "11:00",
-    location: "부산 광안리해수욕장",
-    status: "신청가능",
-    description:
-      "이 모임은 매주 수요일 오전 11시에 부산 광안리 해수욕장에서 진행됩니다. 남녀 모두 참여 가능하며, 참가 신청은 사전에 완료해야 합니다. 준비물로는 러닝화와 물을 챙겨주시기 바랍니다.",
-  };
+  const { postId } = useParams<{ postId: string }>(); // URL에서 postId 가져오기
+  const [post, setPost] = useState<PostDetails | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const fetchPostDetails = async () => {
+      try {
+        // API 호출
+        const response = await axios.get(
+          `http://example.com/api/posts/${postId}`, // 실제 API URL
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // 인증 토큰 추가
+            },
+          }
+        );
+        setPost(response.data); // 데이터 설정
+      } catch (error) {
+        console.error("Failed to fetch post details", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPostDetails();
+  }, [postId]);
+
+  if (loading) {
+    return (
+      <div className="p-4 bg-orange-50/40 min-h-screen flex items-center justify-center">
+        <p className="text-gray-500">로딩 중...</p>
+      </div>
+    );
+  }
+
+  if (!post) {
+    return (
+      <div className="p-4 bg-orange-50/40 min-h-screen flex items-center justify-center">
+        <p className="text-gray-500">게시글 정보를 가져올 수 없습니다.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="p-4 bg-orange-50/40 min-h-screen pt-12">
@@ -26,7 +66,7 @@ const PostList: React.FC = () => {
       <header className="items-center justify-center p-4 w-full fixed top-0 left-0 z-50  py-1">
         <div className="flex flex-col items-center justify-center p-4">
           <h1 className="text-2xl font-bold text-gray-700 mb-2 text-center">
-            부산 광안리해수욕장
+            {post.location}
           </h1>
           <p className="text-sm text-gray-500 text-center">
             현재위치: 부산광역시 부산진구 엄광로 176
