@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import { posts } from "./contents/postItem";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 // 날짜 타입 정의
 interface DateItem {
@@ -11,6 +11,9 @@ interface DateItem {
 }
 
 const BoardList: React.FC = ({}) => {
+  const [params] = useSearchParams();
+  const token = params.get("token");
+  localStorage.setItem("token", token || "");
   const navigate = useNavigate();
   // 날짜 데이터
   const [date, setDate] = useState<DateItem[]>([
