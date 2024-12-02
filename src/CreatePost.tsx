@@ -108,8 +108,8 @@ const CreatePost: React.FC = () => {
           <option value="" disabled>
             성별을 선택하세요
           </option>
-          <option value="man">남자</option>
-          <option value="woman">여자</option>
+          <option value="스텝업">스테업</option>
+          <option value="러닝커넥트">러닝커넥트</option>
           <option value="all">모두</option>
         </select>
 

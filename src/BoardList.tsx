@@ -4,7 +4,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJ1c2VyTmFtZSI6Iuq5gOyYgeynhCIsImlhdCI6MTczMzA1NjQ5MiwiZXhwIjoxNzMzMTQyODkyfQ.w35JoV90xVKs_A6re_iZ5FUA3Xb4rUWaa5_6R1ytMbo";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJ1c2VyTmFtZSI6Iuq5gOuvuOyjvCIsImlhdCI6MTczMzE1ODE4OCwiZXhwIjoxNzMzMjQ0NTg4fQ.pr_BTpnZ5xri8MyFBoBMKUGUzKMRSiOAS_T5n4HBbVw";
 
 // 날짜 타입 정의
 interface DateItem {
