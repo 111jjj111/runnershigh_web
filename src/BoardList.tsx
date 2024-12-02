@@ -146,7 +146,7 @@ const BoardList: React.FC = () => {
                   }`}
                   onClick={(event) => {
                     event.stopPropagation();
-                    navigate("/post/" + post.id);
+                    navigate("/board/search?team=" + post.id);
                   }}
                 >
                   {post.status ? "신청가능" : "인원초과"}

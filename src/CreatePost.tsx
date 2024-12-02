@@ -9,6 +9,7 @@ const CreatePost: React.FC = () => {
   const [contents, setContent] = useState("");
   const [gender, setGender] = useState("");
   const [time, setTime] = useState("");
+  const [image_url, setImage] = useState<File | null>(null);
   const [value, onChange] = useState<Date | null | [Date | null, Date | null]>(
     new Date()
   );
@@ -27,6 +28,7 @@ const CreatePost: React.FC = () => {
       gender,
       time,
       date: selectedDate,
+      image_url: "",
     };
 
     try {
@@ -59,6 +61,12 @@ const CreatePost: React.FC = () => {
   // 작성 완료 버튼 클릭 핸들러
   const handleSubmit = async () => {
     await createBoard();
+  };
+
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setImage(event.target.files[0]);
+    }
   };
 
   return (
@@ -147,6 +155,30 @@ const CreatePost: React.FC = () => {
               </option>
             ))}
           </select>
+        </div>
+
+        {/* 이미지 업로드 */}
+        <div className="flex flex-col items-start">
+          <label
+            htmlFor="image-upload"
+            className="bg-orange-500 text-white px-4 py-2 rounded-lg cursor-pointer"
+          >
+            이미지 업로드
+          </label>
+          <input
+            id="image-upload"
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            className="hidden"
+          />
+          {image_url && (
+            <img
+              src={URL.createObjectURL(image_url)}
+              alt="Preview"
+              className="mt-4 w-full max-h-40 object-cover rounded-lg border border-orange-300"
+            />
+          )}
         </div>
 
         {/* 버튼 */}
