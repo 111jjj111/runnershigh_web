@@ -40,7 +40,7 @@ const CreatePost: React.FC = () => {
 
       // Axios POST 요청
       const response = await axios.post(
-        "http://113.198.230.24:3338/board/create",
+        "https://port-0-runnershigh-bakc-m46t6c3j50881cf3.sel4.cloudtype.app/board/create",
         sendData,
         {
           headers: { Authorization: `Bearer ${token}` }, // 헤더에 토큰 추가

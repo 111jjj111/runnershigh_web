@@ -26,7 +26,7 @@ const PostList: React.FC = () => {
       try {
         // API 호출
         const response = await axios.get(
-          `http://example.com/api/posts/${postId}`, // 실제 API URL
+          `https://port-0-runnershigh-bakc-m46t6c3j50881cf3.sel4.cloudtype.app/${postId}`, // 실제 API URL
           {
             headers: {
               Authorization: `Bearer ${token}`, // 인증 토큰 추가
