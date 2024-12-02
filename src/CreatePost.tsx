@@ -7,7 +7,7 @@ import "react-calendar/dist/Calendar.css";
 const CreatePost: React.FC = () => {
   const [title, setTitle] = useState("");
   const [contents, setContent] = useState("");
-  const [gender, setGender] = useState("");
+  const [matching, setGender] = useState("");
   const [time, setTime] = useState("");
   const [image_url, setImage] = useState<File | null>(null);
   const [value, onChange] = useState<Date | null | [Date | null, Date | null]>(
@@ -25,7 +25,7 @@ const CreatePost: React.FC = () => {
     const sendData = {
       title,
       contents,
-      gender,
+      matching,
       time,
       date: selectedDate,
       image_url: "",
@@ -99,18 +99,18 @@ const CreatePost: React.FC = () => {
           className="w-full border border-orange-300 rounded-lg p-3 h-32 focus:ring-2 focus:ring-orange-500 focus:outline-none resize-none"
         ></textarea>
 
-        {/* 성별 선택 */}
+        {/* 매칭유형 선택 */}
         <select
-          value={gender}
+          value={matching}
           onChange={(e) => setGender(e.target.value)}
           className="w-full border border-orange-300 rounded-lg p-3 bg-white focus:ring-2 focus:ring-orange-500 focus:outline-none"
         >
           <option value="" disabled>
             성별을 선택하세요
           </option>
-          <option value="스텝업">스테업</option>
+          <option value="스텝업">스텝업</option>
           <option value="러닝커넥트">러닝커넥트</option>
-          <option value="all">모두</option>
+          <option value="스텝업과 러닝커넥트">모두</option>
         </select>
 
         {/* 날짜 선택 버튼 */}

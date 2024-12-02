@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import React from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJ1c2VyTmFtZSI6Iuq5gOuvuOyjvCIsImlhdCI6MTczMzE1ODE4OCwiZXhwIjoxNzMzMjQ0NTg4fQ.pr_BTpnZ5xri8MyFBoBMKUGUzKMRSiOAS_T5n4HBbVw";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJ1c2VyTmFtZSI6Iuq5gOyYgeynhCIsImlhdCI6MTczMzE2NDkxMSwiZXhwIjoxNzMzMjUxMzExfQ.bppEXQkucF1N4SAGGIFoIf_K2fgkgyH6zZi8j-njsJc";
 
-// 날짜 타입 정의
 interface DateItem {
   day: number;
   label: string;
@@ -17,35 +16,28 @@ interface PostItem {
   id: number;
   title: string;
   contents: string;
-  image_url: string;
+  image_url: string | null;
   people: number;
   status: boolean;
   gender: string;
   time: string;
-  date: string; // 날짜는 "YYYY-MM-DD" 형식
+  date: string; // "MM:DD" 형식
 }
 
 const BoardList: React.FC = () => {
-  const [params] = useSearchParams();
-  localStorage.setItem("token", token || "");
-  const navigate = useNavigate();
-
-  // 날짜 데이터
   const [date, setDate] = useState<DateItem[]>([
-    { day: 2, label: "월", active: true }, // 초기 활성 날짜 설정
+    { day: 2, label: "월", active: true },
     { day: 3, label: "화", active: false },
     { day: 4, label: "수", active: false },
   ]);
 
-  // 게시판 데이터
   const [posts, setPosts] = useState<PostItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-
-  // 현재 선택된 날짜 상태
+  const navigate = useNavigate();
+  // 현재 선택된 날짜
   const selectedDate = date.find((d) => d.active)?.day;
 
   useEffect(() => {
-    // API 호출
     const fetchPosts = async () => {
       try {
         const response = await axios.get(
@@ -56,7 +48,7 @@ const BoardList: React.FC = () => {
             },
           }
         );
-        setPosts(response.data); // API에서 가져온 데이터 설정
+        setPosts(response.data);
       } catch (error) {
         console.error("Failed to fetch posts", error);
       } finally {
@@ -68,19 +60,14 @@ const BoardList: React.FC = () => {
   }, []);
 
   // 선택된 날짜에 해당하는 게시물 필터링
-  // 선택된 날짜에 해당하는 게시물 필터링
   const filteredPosts = posts.filter((post) => {
-    // 선택된 날짜를 YYYY-MM-DD 형식으로 계산
-    const activeDate = new Date();
-    activeDate.setDate(selectedDate || activeDate.getDate()); // 선택된 날짜로 설정
-    const formattedActiveDate = activeDate.toISOString().split("T")[0];
-
-    return post.date === formattedActiveDate; // 날짜 문자열로 비교
+    // 게시물의 `date` 필드에서 일(day) 값만 추출
+    const postDay = post.date.split(":")[1]; // "MM:DD"에서 "DD" 부분 추출
+    return String(selectedDate).padStart(2, "0") === postDay; // 선택된 날짜와 비교
   });
 
   return (
     <div className="h-screen flex flex-col bg-orange-50/40">
-      {/* 헤더 */}
       <header className="p-8">
         <div className="flex flex-col items-center justify-center">
           <h1 className="text-2xl font-bold text-gray-700 mb-2">게시판</h1>
@@ -145,8 +132,10 @@ const BoardList: React.FC = () => {
                       : "bg-orange-100 text-orange-500"
                   }`}
                   onClick={(event) => {
-                    event.stopPropagation();
-                    navigate("/board/search?team=" + post.id);
+                    event.stopPropagation(); // 이벤트 전파 방지
+                    navigate(`/post/${post.id}`, {
+                      state: { postId: post.id },
+                    }); // 동적으로 post.id 추가
                   }}
                 >
                   {post.status ? "신청가능" : "인원초과"}
@@ -156,7 +145,6 @@ const BoardList: React.FC = () => {
           </div>
         )}
       </div>
-
       <div className="fixed bottom-8 right-10">
         <button
           className="bg-gray-200 text-black px-6 py-3 rounded-full font-bold shadow w-[60px] h-[60px] flex items-center justify-center text-3xl"
