@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 // Axios 인스턴스 생성
 const api = axios.create({
-  baseURL: "http://113.198.230.24:3338", // API 기본 URL 설정
+  baseURL:
+    "https://port-0-runnershigh-bakc-m46t6c3j50881cf3.sel4.cloudtype.app/", // API 기본 URL 설정
 });
 
 // Axios 인터셉터로 토큰 추가
