@@ -105,7 +105,7 @@ const CreatePost: React.FC = () => {
           className="w-full border border-orange-300 rounded-lg p-3 bg-white focus:ring-2 focus:ring-orange-500 focus:outline-none"
         >
           <option value="" disabled>
-            성별을 선택하세요
+            원하는 매칭시스템을 정해주세요
           </option>
           <option value="스텝업">스텝업</option>
           <option value="러닝커넥트">러닝커넥트</option>
