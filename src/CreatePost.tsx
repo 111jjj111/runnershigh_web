@@ -109,7 +109,7 @@ const CreatePost: React.FC = () => {
           </option>
           <option value="스텝업">스텝업(2:2)</option>
           <option value="러닝커넥트">러닝커넥트(4)</option>
-          <option value="스텝업과 러닝커넥트">러닝 메이트(1:3)</option>
+          <option value="스텝업과 러닝커넥트">러닝메이트(1:3)</option>
         </select>
 
         {/* 날짜 선택 버튼 */}
