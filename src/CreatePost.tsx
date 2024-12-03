@@ -105,11 +105,11 @@ const CreatePost: React.FC = () => {
           className="w-full border border-orange-300 rounded-lg p-3 bg-white focus:ring-2 focus:ring-orange-500 focus:outline-none"
         >
           <option value="" disabled>
-            원하는 매칭시스템을 정해주세요
+            원하는 매칭시스템 유형을 정해주세요
           </option>
           <option value="스텝업">스텝업(2:2)</option>
           <option value="러닝커넥트">러닝커넥트(4)</option>
-          <option value="스텝업과 러닝커넥트">모두(1:3)</option>
+          <option value="스텝업과 러닝커넥트">러닝 메이트(1:3)</option>
         </select>
 
         {/* 날짜 선택 버튼 */}
