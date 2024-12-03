@@ -107,9 +107,9 @@ const CreatePost: React.FC = () => {
           <option value="" disabled>
             원하는 매칭시스템을 정해주세요
           </option>
-          <option value="스텝업">스텝업</option>
-          <option value="러닝커넥트">러닝커넥트</option>
-          <option value="스텝업과 러닝커넥트">모두</option>
+          <option value="스텝업">스텝업(2:2)</option>
+          <option value="러닝커넥트">러닝커넥트(4)</option>
+          <option value="스텝업과 러닝커넥트">모두(1:3)</option>
         </select>
 
         {/* 날짜 선택 버튼 */}
@@ -145,7 +145,7 @@ const CreatePost: React.FC = () => {
           <select
             id="time-select"
             onChange={(e) => setTime(e.target.value)}
-            className="border border-gray-300 rounded-lg p-2"
+            className="border border-gray-300 rounded-lg p-2 w-full"
           >
             <option value="">시간을 선택하세요</option>
             {Array.from({ length: 24 }, (_, index) => (
@@ -160,7 +160,7 @@ const CreatePost: React.FC = () => {
         <div className="flex flex-col items-start">
           <label
             htmlFor="image-upload"
-            className="bg-orange-500 text-white px-4 py-2 rounded-lg cursor-pointer"
+            className="bg-orange-500 text-white px-4 py-2 rounded-lg cursor-pointer w-full text-center"
           >
             이미지 업로드
           </label>
