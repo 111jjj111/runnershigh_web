@@ -51,7 +51,7 @@ const RankingPage: React.FC = () => {
             }`}
           >
             {/* 그래프 텍스트 */}
-            <div className="p-4 text-center text-black flex flex-col items-center">
+            <div className="py-4 text-center text-black flex flex-col items-center">
               {/* 이모지 */}
               <div className="text-3xl mb-1">
                 {person.position === 1 && "👑"}

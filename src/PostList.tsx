@@ -144,13 +144,13 @@ const PostList: React.FC = () => {
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
         contentLabel="신청 완료"
-        className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto mt-20"
+        className="bg-white p-6 rounded-lg shadow-md w-[80%] min-w-[200px] max-w-[350px] ratio-[4/3] mx-auto mt-20"
         overlayClassName="bg-black bg-opacity-40 fixed inset-0 flex items-center justify-center"
       >
         <h2 className="text-xl font-bold text-gray-700 mb-4">신청 완료</h2>
         <p className="text-gray-600 mb-6">신청이 완료되었습니다.</p>
         <button
-          className="bg-orange-500 text-white px-6 py-3 rounded-lg font-bold"
+          className="bg-orange-500 text-white px-6 py-3 rounded-lg font-bold w-full"
           onClick={() => {
             setIsModalOpen(false);
             navigate("/");
