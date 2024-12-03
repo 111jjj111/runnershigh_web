@@ -48,7 +48,6 @@ const CreatePost: React.FC = () => {
           headers: { Authorization: `Bearer ${token}` }, // 헤더에 토큰 추가
         }
       );
-
       console.log("Board Created:", response.data);
       alert("게시글이 작성되었습니다!");
       navigate(-1);

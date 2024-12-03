@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Modal from "react-modal"; // react-modal import
 
 // 게시물 데이터 타입 정의
 interface PostDetails {
@@ -25,10 +26,11 @@ const token =
 
 const PostList: React.FC = () => {
   const { postId } = useParams<{ postId: string }>();
-  console.log("Post ID:", postId);
   const [post, setPost] = useState<PostDetails | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 관리
   const navigate = useNavigate();
+
   useEffect(() => {
     const fetchPostDetails = async () => {
       try {
@@ -124,8 +126,7 @@ const PostList: React.FC = () => {
             <button
               className="bg-orange-500 text-white px-6 py-3 rounded-lg font-bold shadow"
               onClick={() => {
-                alert("신청되었습니다.");
-                navigate(-1);
+                setIsModalOpen(true); // 모달 열기
               }}
             >
               신청하기
@@ -137,6 +138,27 @@ const PostList: React.FC = () => {
           )}
         </div>
       </div>
+
+      {/* 모달 구현 */}
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+        contentLabel="신청 완료"
+        className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto mt-20"
+        overlayClassName="bg-black bg-opacity-40 fixed inset-0 flex items-center justify-center"
+      >
+        <h2 className="text-xl font-bold text-gray-700 mb-4">신청 완료</h2>
+        <p className="text-gray-600 mb-6">신청이 완료되었습니다.</p>
+        <button
+          className="bg-orange-500 text-white px-6 py-3 rounded-lg font-bold"
+          onClick={() => {
+            setIsModalOpen(false);
+            navigate("/");
+          }}
+        >
+          확인
+        </button>
+      </Modal>
     </div>
   );
 };
