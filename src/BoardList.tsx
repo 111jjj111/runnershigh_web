@@ -70,7 +70,7 @@ const BoardList: React.FC = () => {
     <div className="h-screen flex flex-col bg-orange-50/40">
       <header className="p-8">
         <div className="flex flex-col items-center justify-center">
-          <h1 className="text-2xl font-bold text-gray-700 mb-2">게시판</h1>
+          <h1 className="text-2xl font-bold text-gray-700 mb-2">git!!</h1>
           <p className="text-sm text-gray-400 text-center">
             현재위치: 부산광역시 부산진구 엄광로 176
           </p>
