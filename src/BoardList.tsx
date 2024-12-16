@@ -26,9 +26,9 @@ interface PostItem {
 
 const BoardList: React.FC = () => {
   const [date, setDate] = useState<DateItem[]>([
-    { day: 2, label: "월", active: true },
-    { day: 3, label: "화", active: false },
-    { day: 4, label: "수", active: false },
+    { day: 15, label: "일", active: true },
+    { day: 16, label: "월", active: false },
+    { day: 17, label: "화", active: false },
   ]);
 
   const [posts, setPosts] = useState<PostItem[]>([]);
