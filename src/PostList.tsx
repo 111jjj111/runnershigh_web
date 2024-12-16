@@ -22,7 +22,7 @@ interface PostDetails {
 
 // 인증 토큰
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJ1c2VyTmFtZSI6Iuq5gOyYgeynhCIsImlhdCI6MTczMzE2NDkxMSwiZXhwIjoxNzMzMjUxMzExfQ.bppEXQkucF1N4SAGGIFoIf_K2fgkgyH6zZi8j-njsJc";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJ1c2VyTmFtZSI6Iuq5gOyYgeynhCIsImlhdCI6MTczNDMyMTQ5NywiZXhwIjoxNzM0NDA3ODk3fQ.IIOwC0PJG6_Js0hm5hei4WFQkVY-UrxiIIJNmNhyzIM";
 
 const PostList: React.FC = () => {
   const { postId } = useParams<{ postId: string }>();
